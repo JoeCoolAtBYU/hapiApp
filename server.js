@@ -59,7 +59,7 @@ server.route({
 
 function newCardHandler(request, reply) {
     if (request.method === 'get') {
-        reply.view('new');
+        reply.view('new', {card_images: mapImages()});
     } else {
         var card = {
             name: request.payload.name,
@@ -92,6 +92,10 @@ function deleteCardHandler(request, reply) {
 function loadCards() {
     var file = fs.readFileSync('./cards.json');
     return JSON.parse(file.toString());
+}
+
+function mapImages() {
+    return fs.readdirSync('./public/images/cards');
 }
 
 server.start(function () {
