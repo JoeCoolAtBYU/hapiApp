@@ -2,9 +2,9 @@ var Hapi = require('hapi');
 
 var server = new Hapi.Server();
 
-server.connection({ port: 3000 });
+server.connection({port: 3000});
 
-server.ext('onRequest', function(request, reply) {
+server.ext('onRequest', function (request, reply) {
     console.log('Request received: ' + request.path);
     reply.continue();
 });
@@ -17,8 +17,19 @@ server.route({
     }
 });
 
+server.route({
+    path: '/assets/{path*}',
+    method: 'GET',
+    handler: {
+        directory: {
+            path: './public',
+            listing: false
+        }
+    }
+});
 
-server.start(function() {
+
+server.start(function () {
     console.log('Listening on ' + server.info.uri);
 });
 
