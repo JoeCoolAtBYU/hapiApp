@@ -2,18 +2,24 @@ var Hapi = require('hapi');
 
 var server = new Hapi.Server();
 
-server.connection({port: 3000});
+server.connection({ port: 3000 });
+
+server.ext('onRequest', function(request, reply) {
+    console.log('Request received: ' + request.path);
+    reply.continue();
+});
 
 server.route({
-    path: '/hello',
+    path: '/',
     method: 'GET',
-    handler: function (request, reply) {
-        reply('Hello World');
+    handler: {
+        file: 'templates/index.html'
     }
 });
 
-server.start(function () {
-    console.log('Listenting on ' + server.info.uri);
+
+server.start(function() {
+    console.log('Listening on ' + server.info.uri);
 });
 
 
