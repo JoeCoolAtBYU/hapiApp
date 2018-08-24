@@ -2,3 +2,4 @@
 node_modules/
 helloWorldHapi.iml
 package-lock.json
+logs/
