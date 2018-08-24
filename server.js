@@ -43,6 +43,12 @@ server.route({
     handler: cardsHandler
 });
 
+server.route({
+    path: '/cards/{id}',
+    method: 'DELETE',
+    handler: deleteCardHandler
+});
+
 function newCardHandler(request, reply) {
     if (request.method === 'get') {
         reply.file('templates/new.html');
@@ -68,6 +74,10 @@ function saveCard(card){
     var id = uuid.v1();
     card.id = id;
     cards[id] = card;
+}
+
+function deleteCardHandler(request, reply) {
+    delete cards[request.params.id];
 }
 
 server.start(function () {
