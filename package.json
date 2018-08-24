@@ -9,6 +9,6 @@
   "author": "Joshua Barnett",
   "license": "ISC",
   "dependencies": {
-    "hapi": "17.5.3"
+    "hapi": "^8.4.0"
   }
 }
