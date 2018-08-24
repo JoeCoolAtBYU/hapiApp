@@ -2,6 +2,7 @@ var Hapi = require('hapi');
 var uuid = require('uuid');
 var fs = require('fs');
 var Joi = require('joi');
+var Boom = require('boom');
 
 var server = new Hapi.Server();
 
