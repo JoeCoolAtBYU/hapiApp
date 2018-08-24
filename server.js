@@ -75,7 +75,7 @@ function newCardHandler(request, reply) {
 }
 
 function cardsHandler(request, reply) {
-    reply.file('templates/cards.html');
+    reply.view('cards', {cards: cards});
 }
 
 function saveCard(card) {
@@ -86,6 +86,7 @@ function saveCard(card) {
 
 function deleteCardHandler(request, reply) {
     delete cards[request.params.id];
+    reply();
 }
 
 function loadCards() {
