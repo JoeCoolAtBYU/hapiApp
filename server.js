@@ -1,9 +1,10 @@
 var Hapi = require('hapi');
 var uuid = require('uuid');
+var fs = require('fs');
 
 var server = new Hapi.Server();
 
-var cards = {};
+var cards = loadCards();
 
 server.connection({port: 3000});
 
@@ -85,6 +86,11 @@ function saveCard(card) {
 
 function deleteCardHandler(request, reply) {
     delete cards[request.params.id];
+}
+
+function loadCards() {
+    var file = fs.readFileSync('./cards.json');
+    return JSON.parse(file.toString());
 }
 
 server.start(function () {
