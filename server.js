@@ -7,6 +7,13 @@ var cards = {};
 
 server.connection({port: 3000});
 
+server.views({
+    engines: {
+        html: require('handlebars')
+    },
+    path: './templates'
+});
+
 server.ext('onRequest', function (request, reply) {
     console.log('Request received: ' + request.path);
     reply.continue();
@@ -51,7 +58,7 @@ server.route({
 
 function newCardHandler(request, reply) {
     if (request.method === 'get') {
-        reply.file('templates/new.html');
+        reply.view('new');
     } else {
         var card = {
             name: request.payload.name,
@@ -70,7 +77,7 @@ function cardsHandler(request, reply) {
     reply.file('templates/cards.html');
 }
 
-function saveCard(card){
+function saveCard(card) {
     var id = uuid.v1();
     card.id = id;
     cards[id] = card;
