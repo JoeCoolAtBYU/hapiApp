@@ -22,6 +22,13 @@ server.ext('onRequest', function (request, reply) {
     reply.continue();
 });
 
+server.ext('onPreResponse', function (request, reply) {
+    if (request.response.isBoom) {
+        return reply.view('error', request.response);
+    }
+    reply.continue();
+});
+
 server.route({
     path: '/',
     method: 'GET',
